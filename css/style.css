@@ -1,4 +1,7 @@
-/* ===== COLORS + FONTS (change these later) ===== */
+/* ===== FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ===== COLORS ===== */
 :root {
   --bg: #0f0f0f;
   --text: #f2f2f2;
@@ -25,7 +28,7 @@ h2 { font-size: 1.8rem; margin-bottom: 16px; }
 main { padding: 0 16px; }
 section { padding: 40px 0; }
 
-/* ===== HEADER: hamburger left, name centered ===== */
+/* ===== TOP BAR: menu left, logo + name in the middle ===== */
 .site-header {
   position: sticky; top: 0; z-index: 50;
   display: grid;
@@ -41,9 +44,20 @@ section { padding: 40px 0; }
   display: flex; flex-direction: column; justify-content: center; gap: 6px;
 }
 .menu-btn span { display: block; width: 26px; height: 2px; background: var(--text); }
-.brand { text-align: center; text-decoration: none; }
-.brand-name { display: block; font-family: var(--font-head); font-size: 1.4rem; line-height: 1.2; }
-.brand-tag { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+.brand {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  text-decoration: none; color: #fff;
+}
+.brand-logo { flex: 0 0 auto; width: 52px; height: 52px; }
+.brand-logo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%; /* cuts off the gray corners */
+}
+.brand-text { display: flex; flex-direction: column; text-align: left; line-height: 1.05; }
+.brand-name { font-family: var(--font-head); font-weight: 700; font-size: 1.45rem; }
+.brand-tag  { font-family: var(--font-head); font-style: italic; font-weight: 400; font-size: 1.05rem; }
 
 /* ===== POP-OUT MENU ===== */
 .menu {
@@ -127,6 +141,9 @@ section { padding: 40px 0; }
   .carousel { margin: 0; padding: 0; }
   .carousel img { flex-basis: 45%; }
   .grid { grid-template-columns: repeat(2, 1fr); }
+  .brand-logo { width: 64px; height: 64px; }
+  .brand-name { font-size: 1.9rem; }
+  .brand-tag  { font-size: 1.35rem; }
 }
 
 /* ===== COMPUTERS (1100px and wider) ===== */
