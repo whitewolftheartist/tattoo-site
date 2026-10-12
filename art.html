@@ -3,10 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Art | WhiteWolf Tattoos & Art</title>
   <meta name="robots" content="noindex">
-  <title>Art</title>
+  <meta name="description" content="Original art by WhiteWolf.">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Art page coming soon</h1>
+
+  <header class="site-header">
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="brand" aria-label="WhiteWolf Tattoos and Art, home">
+      <span class="brand-logo">
+        <img src="media/logo.png" alt="" width="52" height="52">
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">WhiteWolf</span>
+        <span class="brand-tag">Tattoos &amp; Art</span>
+      </span>
+    </a>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Main menu">
+    <button class="menu-close" aria-label="Close menu">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Tattoos</a>
+    <a href="art.html">Art</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About Me</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Art</h2>
+      <div class="grid">
+        <img src="https://picsum.photos/seed/a1/800/800" alt="Artwork">
+        <img src="https://picsum.photos/seed/a2/800/800" alt="Artwork" loading="lazy">
+        <img src="https://picsum.photos/seed/a3/800/800" alt="Artwork" loading="lazy">
+        <img src="https://picsum.photos/seed/a4/800/800" alt="Artwork" loading="lazy">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="https://instagram.com/whitewolf.the.artist">Instagram</a>
+    <p>&copy; 2026 WhiteWolf Tattoos &amp; Art</p>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
