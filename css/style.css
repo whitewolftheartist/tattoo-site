@@ -1,0 +1,136 @@
+/* ===== COLORS + FONTS (change these later) ===== */
+:root {
+  --bg: #0f0f0f;
+  --text: #f2f2f2;
+  --muted: #a0a0a0;
+  --accent: #c9a27e;
+  --line: #2a2a2a;
+  --font-head: 'Playfair Display', serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+/* ===== BASICS ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+img, video { display: block; width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2 { font-family: var(--font-head); font-weight: 400; line-height: 1.2; }
+h2 { font-size: 1.8rem; margin-bottom: 16px; }
+main { padding: 0 16px; }
+section { padding: 40px 0; }
+
+/* ===== HEADER: hamburger left, name centered ===== */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  padding: 10px 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.menu-btn {
+  width: 44px; height: 44px;
+  background: none; border: 0; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+}
+.menu-btn span { display: block; width: 26px; height: 2px; background: var(--text); }
+.brand { text-align: center; text-decoration: none; }
+.brand-name { display: block; font-family: var(--font-head); font-size: 1.4rem; line-height: 1.2; }
+.brand-tag { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+/* ===== POP-OUT MENU ===== */
+.menu {
+  position: fixed; inset: 0; z-index: 100;
+  background: var(--bg);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform .3s ease, visibility .3s;
+}
+.menu.open { transform: translateX(0); visibility: visible; }
+.menu a { font-family: var(--font-head); font-size: 2rem; text-decoration: none; padding: 8px 16px; }
+.menu-close {
+  position: absolute; top: 10px; left: 16px;
+  width: 44px; height: 44px;
+  background: none; border: 0; color: var(--text);
+  font-size: 2rem; cursor: pointer;
+}
+
+/* ===== HOME: top section ===== */
+.hero { padding: 48px 0 24px; text-align: center; }
+.hero h1 { font-size: 2.2rem; margin-bottom: 12px; }
+.hero p { color: var(--muted); }
+.btn {
+  display: inline-block; margin-top: 20px;
+  padding: 14px 28px;
+  background: var(--accent); color: #111;
+  font-weight: 600; text-decoration: none;
+  border-radius: 999px;
+}
+
+/* ===== SWIPE CAROUSEL ===== */
+.carousel {
+  display: flex; gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 -16px; padding: 0 16px;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar { display: none; }
+.carousel img {
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ===== FAQ ===== */
+.faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+.faq summary {
+  cursor: pointer; font-weight: 600; list-style: none;
+  display: flex; justify-content: space-between; gap: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; font-size: 1.4rem; line-height: 1; }
+.faq details[open] summary::after { content: '−'; }
+.faq details p { margin-top: 12px; color: var(--muted); }
+
+/* ===== PHOTO GRIDS (Art + Portfolio) ===== */
+.grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.grid img, .grid video { border-radius: 8px; }
+
+/* ===== PRICING ===== */
+.price-card { border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin-bottom: 12px; }
+.price-card h3 { font-family: var(--font-head); font-weight: 400; font-size: 1.3rem; }
+.price { font-size: 1.6rem; color: var(--accent); margin: 4px 0 8px; }
+
+/* ===== FOOTER ===== */
+.site-footer {
+  padding: 32px 16px; text-align: center;
+  color: var(--muted); font-size: .9rem;
+  border-top: 1px solid var(--line);
+}
+.site-footer a { display: inline-block; padding: 12px; }
+
+/* ===== TABLETS (768px and wider) ===== */
+@media (min-width: 768px) {
+  main { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .hero h1 { font-size: 3rem; }
+  .carousel { margin: 0; padding: 0; }
+  .carousel img { flex-basis: 45%; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== COMPUTERS (1100px and wider) ===== */
+@media (min-width: 1100px) {
+  .carousel img { flex-basis: 32%; }
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
