@@ -151,3 +151,34 @@ section { padding: 40px 0; }
   .carousel img { flex-basis: 32%; }
   .grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+
+/* ===== GOLD ROTATING HEADLINE ===== */
+:root { --gold: #d4af37; }
+
+.rotator {
+  display: grid;          /* stacks all headlines in the same spot */
+  color: var(--gold);
+  overflow: hidden;
+}
+.rotator span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateX(-40px);   /* waits on the left */
+  transition: opacity .6s ease, transform .6s ease;
+}
+.rotator span.is-active {
+  opacity: 1;
+  transform: translateX(0);       /* in the middle, showing */
+}
+.rotator span.is-leaving {
+  opacity: 0;
+  transform: translateX(40px);    /* slides out to the right */
+}
+
+/* for people who turn off motion on their phone: just fade, no sliding */
+@media (prefers-reduced-motion: reduce) {
+  .rotator span,
+  .rotator span.is-active,
+  .rotator span.is-leaving { transform: none; }
+}
