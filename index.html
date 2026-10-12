@@ -3,10 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhiteWolf | Tattoos & Art</title>
   <meta name="robots" content="noindex">
-  <title>Home</title>
+  <meta name="description" content="Custom tattoos and original art by WhiteWolf.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Home page coming soon</h1>
+
+  <!-- HEADER (same on every page) -->
+  <header class="site-header">
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="brand">
+      <span class="brand-name">WhiteWolf</span>
+      <span class="brand-tag">Tattoos &amp; Art</span>
+    </a>
+  </header>
+
+  <!-- MENU (same on every page) -->
+  <nav class="menu" id="menu" aria-label="Main menu">
+    <button class="menu-close" aria-label="Close menu">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Tattoos</a>
+    <a href="art.html">Art</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About Me</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1>Custom tattoos &amp; original art</h1>
+      <p>Based in [Maryland]. Booking now.</p>
+      <a href="https://instagram.com/whitewolf.the.artist" class="btn">Book with me</a>
+    </section>
+
+    <section>
+      <h2>Recent work</h2>
+      <div class="carousel">
+        <img src="https://picsum.photos/seed/t1/800/1000" alt="Tattoo 1">
+        <img src="https://picsum.photos/seed/t2/800/1000" alt="Tattoo 2" loading="lazy">
+        <img src="https://picsum.photos/seed/t3/800/1000" alt="Tattoo 3" loading="lazy">
+        <img src="https://picsum.photos/seed/t4/800/1000" alt="Tattoo 4" loading="lazy">
+        <img src="https://picsum.photos/seed/t5/800/1000" alt="Tattoo 5" loading="lazy">
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2>FAQ</h2>
+      <details>
+        <summary>How do I book?</summary>
+        <p>Answer goes here.</p>
+      </details>
+      <details>
+        <summary>Do you take walk-ins?</summary>
+        <p>Answer goes here.</p>
+      </details>
+      <details>
+        <summary>Is there a deposit?</summary>
+        <p>Answer goes here.</p>
+      </details>
+      <details>
+        <summary>How should I take care of my new tattoo?</summary>
+        <p>Answer goes here.</p>
+      </details>
+    </section>
+  </main>
+
+  <!-- FOOTER (same on every page) -->
+  <footer class="site-footer">
+    <a href="https://instagram.com/whitewolf.the.artist">Instagram</a>
+    <p>&copy; 2026 WhiteWolf</p>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
