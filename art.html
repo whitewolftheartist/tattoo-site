@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Art | WhiteWolf Tattoos & Art</title>
+  <title>Art Portfolio | WhiteWolf Tattoos & Art</title>
   <meta name="robots" content="noindex">
   <meta name="description" content="Original art by WhiteWolf.">
   <link rel="stylesheet" href="css/style.css">
@@ -36,15 +36,20 @@
 
   <main>
     <section>
-      <h2>Art</h2>
-      <div class="grid">
-        <img src="https://picsum.photos/seed/a1/800/800" alt="Artwork">
-        <img src="https://picsum.photos/seed/a2/800/800" alt="Artwork" loading="lazy">
-        <img src="https://picsum.photos/seed/a3/800/800" alt="Artwork" loading="lazy">
-        <img src="https://picsum.photos/seed/a4/800/800" alt="Artwork" loading="lazy">
-      </div>
+      <h2>Art Portfolio</h2>
+      <p class="page-sub">Original work by WhiteWolf. Tap any piece to see it up close.</p>
+      <div class="gallery" id="gallery"></div>
     </section>
   </main>
+
+  <!-- TAP-TO-SEE-BIG VIEWER -->
+  <dialog class="lightbox" id="lightbox" aria-label="Artwork viewer">
+    <img id="lb-img" alt="">
+    <button class="lb-btn lb-close" id="lb-close" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" id="lb-prev" aria-label="Previous">&#8249;</button>
+    <button class="lb-btn lb-next" id="lb-next" aria-label="Next">&#8250;</button>
+    <p class="lb-count" id="lb-count"></p>
+  </dialog>
 
   <footer class="site-footer">
     <a href="https://instagram.com/whitewolf.the.artist">Instagram</a>
@@ -52,5 +57,82 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    // ==========================================================
+    // 🔢 CHANGE THIS NUMBER to how many art photos there are!
+    // ==========================================================
+    const ART_COUNT = 36;
+
+    const gallery = document.getElementById('gallery');
+    const box = document.getElementById('lightbox');
+    const bigImg = document.getElementById('lb-img');
+    const counter = document.getElementById('lb-count');
+    let current = 1;
+
+    // turns 1 into "001", 12 into "012"
+    const num = (i) => String(i).padStart(3, '0');
+
+    // build the grid
+    for (let i = 1; i <= ART_COUNT; i++) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'See artwork ' + i + ' bigger');
+
+      const img = document.createElement('img');
+      if (i > 6) img.loading = 'lazy';      // only load the first 6 right away
+      img.decoding = 'async';
+      img.width = 800;
+      img.height = 800;
+      img.alt = 'Original artwork by WhiteWolf, piece ' + i;
+      img.src = 'media/art/small/art-' + num(i) + '.webp';
+
+      btn.appendChild(img);
+      btn.addEventListener('click', () => openBox(i));
+      gallery.appendChild(btn);
+    }
+
+    // show one big picture (wraps around at the ends)
+    function show(i) {
+      current = ((i - 1 + ART_COUNT) % ART_COUNT) + 1;
+      bigImg.src = 'media/art/big/art-' + num(current) + '.webp';
+      bigImg.alt = 'Original artwork by WhiteWolf, piece ' + current;
+      counter.textContent = current + ' / ' + ART_COUNT;
+    }
+    function openBox(i) {
+      show(i);
+      box.showModal();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeBox() { box.close(); }
+
+    box.addEventListener('close', () => {
+      document.body.style.overflow = '';
+      bigImg.removeAttribute('src');
+    });
+
+    // buttons
+    document.getElementById('lb-prev').addEventListener('click', () => show(current - 1));
+    document.getElementById('lb-next').addEventListener('click', () => show(current + 1));
+    document.getElementById('lb-close').addEventListener('click', closeBox);
+
+    // tap the dark area to close
+    box.addEventListener('click', (e) => { if (e.target === box) closeBox(); });
+
+    // arrow keys on a computer
+    document.addEventListener('keydown', (e) => {
+      if (!box.open) return;
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+
+    // swipe left/right on a phone
+    let startX = 0;
+    box.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    box.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx > 50) show(current - 1);
+      if (dx < -50) show(current + 1);
+    });
+  </script>
 </body>
 </html>
