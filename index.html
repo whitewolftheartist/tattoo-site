@@ -58,6 +58,13 @@
       </div>
     </section>
 
+    <section class="reviews">
+      <h2>What Clients Are Saying</h2>
+      <p class="page-sub">Real words from real people.</p>
+      <div class="review-track" id="review-track"></div>
+      <div class="review-dots" id="review-dots"></div>
+    </section>
+    
         <section class="faq">
       <h2>Got Questions? I’ve Got You.</h2>
       <p style="color:var(--muted); margin:-8px 0 24px;">Real answers. No stress.</p>
@@ -161,5 +168,81 @@
   </footer>
 
   <script src="js/main.js"></script>
+    <script>
+    // ==========================================================
+    // 🔢 CHANGE THIS NUMBER to how many review photos there are!
+    // ==========================================================
+    const REVIEW_COUNT = 6;
+    const REVIEW_SPEED = 4000;   // 4000 = 4 seconds per review
+
+    const track = document.getElementById('review-track');
+    const dotsBox = document.getElementById('review-dots');
+    const two = (n) => String(n).padStart(2, '0');   // 1 → "01"
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let index = 0;
+
+    // build the photos and dots
+    for (let i = 1; i <= REVIEW_COUNT; i++) {
+      const img = document.createElement('img');
+      img.src = 'media/reviews/review-' + two(i) + '.webp';
+      img.alt = 'Client review ' + i;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      track.appendChild(img);
+
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Show review ' + i);
+      dot.addEventListener('click', () => { goTo(i - 1); pauseForAWhile(); });
+      dotsBox.appendChild(dot);
+    }
+
+    function lightDot() {
+      [...dotsBox.children].forEach((d, i) => d.classList.toggle('is-active', i === index));
+    }
+
+    // slide to one review (in the middle)
+    function goTo(i) {
+      index = (i + REVIEW_COUNT) % REVIEW_COUNT;
+      const slide = track.children[index];
+      track.scrollTo({
+        left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2,
+        behavior: calm ? 'auto' : 'smooth'
+      });
+      lightDot();
+    }
+
+    // when someone swipes, figure out which review is in the middle
+    let scrollTimer;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const middle = track.scrollLeft + track.clientWidth / 2;
+        let closest = 0, best = Infinity;
+        [...track.children].forEach((s, i) => {
+          const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - middle);
+          if (d < best) { best = d; closest = i; }
+        });
+        index = closest;
+        lightDot();
+      }, 120);
+    }, { passive: true });
+
+    // auto-slide, but pause while someone is touching it
+    let paused = false, resumeTimer;
+    function pauseForAWhile() {
+      paused = true;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { paused = false; }, 6000);   // starts again after 6 seconds
+    }
+    track.addEventListener('touchstart', pauseForAWhile, { passive: true });
+    track.addEventListener('mouseenter', () => { paused = true; });
+    track.addEventListener('mouseleave', () => { paused = false; });
+
+    lightDot();
+    if (!calm) {   // people who turned on "Reduce Motion" can still swipe, it just won't move by itself
+      setInterval(() => { if (!paused) goTo(index + 1); }, REVIEW_SPEED);
+    }
+  </script>
 </body>
 </html>
