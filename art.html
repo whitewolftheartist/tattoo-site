@@ -84,7 +84,7 @@
       img.width = 800;
       img.height = 800;
       img.alt = 'Original artwork by WhiteWolf, piece ' + i;
-      img.src = 'media/art-work/small/art-' + num(i) + '.webp';
+      img.src = 'media/art-work/Small/art-' + num(i) + '.webp';
 
       btn.appendChild(img);
       btn.addEventListener('click', () => openBox(i));
@@ -94,7 +94,7 @@
     // show one big picture (wraps around at the ends)
     function show(i) {
       current = ((i - 1 + ART_COUNT) % ART_COUNT) + 1;
-      bigImg.src = 'media/art-work/big/art-' + num(current) + '.webp';
+      bigImg.src = 'media/art-work/Big/art-' + num(current) + '.webp';
       bigImg.alt = 'Original artwork by WhiteWolf, piece ' + current;
       counter.textContent = current + ' / ' + ART_COUNT;
     }
