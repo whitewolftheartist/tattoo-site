@@ -317,3 +317,20 @@ section { padding: 40px 0; }
 .car-btn img { width: 24px; height: 24px; object-fit: contain; }
 .car-prev { left: 6px; }
 .car-next { right: 6px; }
+
+
+/* ===== BOTTOM CAROUSEL: show the WHOLE photo (no cropping) ===== */
+.carousel-fit { align-items: center; }
+.carousel-fit img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;      /* use the photo's real shape */
+  object-fit: contain;     /* never cut anything off */
+}
+@media (min-width: 768px) {
+  .carousel-fit img { flex-basis: 70%; width: 70%; }   /* tablet */
+}
+@media (min-width: 1100px) {
+  .carousel-fit img { flex-basis: 50%; width: 50%; }   /* computer */
+}
