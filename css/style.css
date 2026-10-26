@@ -342,3 +342,14 @@ html, body {
   max-width: 100%;
 }
 main { overflow-x: clip; }
+
+
+/* ===== BIGGER, BOLDER "YOU IMAGINE / I CREATE" ===== */
+.hero .rotator {
+  font-size: 3rem;       /* phone size (was 2.2rem) */
+  font-weight: 700;      /* bold */
+  line-height: 1.1;
+}
+@media (min-width: 768px) {
+  .hero .rotator { font-size: 4.5rem; }   /* bigger on tablets and computers */
+}
