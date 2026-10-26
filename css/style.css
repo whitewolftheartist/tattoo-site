@@ -1,5 +1,5 @@
 /* ===== FONTS ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
 /* ===== COLORS ===== */
 :root {
@@ -9,7 +9,7 @@
   --accent: #c9a27e;
   --line: #2a2a2a;
   --font-head: 'Playfair Display', serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
 }
 
 /* ===== BASICS ===== */
