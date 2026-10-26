@@ -382,3 +382,27 @@ main { overflow-x: clip; }
 /* ===== LESS SPACE between the body text and the first carousel ===== */
 .hero { padding-bottom: 8px; }           /* was 24px */
 .top-carousel { padding-top: 8px; }      /* was 16px */
+
+
+/* ===== FAQ: easy-to-read charcoal card ===== */
+.faq {
+  background: #171717;          /* soft charcoal, not pure black */
+  border-radius: 12px;
+  padding: 32px 20px;
+  margin: 24px 0;
+}
+.faq summary {
+  color: #f0f0f0;               /* soft white questions */
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.faq summary::after { color: var(--gold); }   /* gold + and − signs */
+.faq details { border-bottom-color: #2c2c2c; }
+.faq details p {
+  color: #c9c9c9;               /* light gray answers, easy to read */
+  font-size: 1rem;
+  line-height: 1.7;             /* more space between lines */
+}
+@media (min-width: 768px) {
+  .faq { padding: 48px 40px; }
+}
