@@ -406,3 +406,19 @@ main { overflow-x: clip; }
 @media (min-width: 768px) {
   .faq { padding: 48px 40px; }
 }
+
+
+
+/* ===== FAQ HEADLINE: 2 clean lines, centered ===== */
+.faq-title {
+  text-align: center;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.faq-title span { display: block; }            /* each part on its own line */
+.faq-title-gold { color: var(--gold); font-weight: 700; }
+.faq-sub {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
