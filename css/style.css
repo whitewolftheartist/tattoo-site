@@ -353,3 +353,7 @@ main { overflow-x: clip; }
 @media (min-width: 768px) {
   .hero .rotator { font-size: 4.5rem; }   /* bigger on tablets and computers */
 }
+
+
+/* bold words in the Fresh vs Healed text stand out in white */
+.hero-body strong { color: var(--text); font-weight: 700; }
