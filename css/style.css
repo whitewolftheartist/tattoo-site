@@ -8,7 +8,7 @@
   --muted: #a0a0a0;
   --accent: #c9a27e;
   --line: #2a2a2a;
-  --font-head: 'Playfair Display', serif;
+  --font-head: 'Poppins', system-ui, sans-serif;
   --font-body: 'Poppins', system-ui, sans-serif;
 }
 
