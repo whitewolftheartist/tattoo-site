@@ -310,7 +310,7 @@ section { padding: 40px 0; }
   z-index: 2;
   width: 44px; height: 44px;          /* big enough to tap */
   padding: 10px; border: 0; border-radius: 50%;
-  background: rgba(0, 0, 0, .45);    /* dark circle so the arrow shows on any photo */
+  background: none;                  /* no circle behind the arrows */
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
