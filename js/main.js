@@ -39,3 +39,28 @@ if (rotator) {
     setTimeout(() => oldLine.classList.remove('is-leaving'), 700);
   }, 3000); // 3000 = 3 seconds. Make it bigger to show each one longer.
 }
+
+
+// ===== CAROUSEL ARROWS =====
+document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
+  const track = wrap.querySelector('.carousel');
+  const prev = wrap.querySelector('.car-prev');
+  const next = wrap.querySelector('.car-next');
+
+  // how far to move = one photo + the gap between photos
+  const step = () => {
+    const photo = track.querySelector('img');
+    return photo ? photo.offsetWidth + 12 : track.clientWidth;
+  };
+  const atStart = () => track.scrollLeft <= 5;
+  const atEnd = () => track.scrollLeft + track.clientWidth >= track.scrollWidth - 5;
+
+  next.addEventListener('click', () => {
+    if (atEnd()) track.scrollTo({ left: 0, behavior: 'smooth' });   // last photo? go back to first
+    else track.scrollBy({ left: step(), behavior: 'smooth' });
+  });
+  prev.addEventListener('click', () => {
+    if (atStart()) track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });   // first photo? jump to last
+    else track.scrollBy({ left: -step(), behavior: 'smooth' });
+  });
+});
