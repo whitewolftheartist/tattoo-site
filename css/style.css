@@ -334,3 +334,11 @@ section { padding: 40px 0; }
 @media (min-width: 1100px) {
   .carousel-fit img { flex-basis: 50%; width: 50%; }   /* computer */
 }
+
+
+/* ===== STOP THE PAGE FROM MOVING SIDEWAYS ON PHONES ===== */
+html, body {
+  overflow-x: clip;     /* trims anything poking past the edge */
+  max-width: 100%;
+}
+main { overflow-x: clip; }
