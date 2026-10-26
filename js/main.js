@@ -47,7 +47,7 @@ const calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
   const track = wrap.querySelector('.carousel');
-  const photos = track.querySelectorAll('img');
+  const photos = [...track.children];
   const prev = wrap.querySelector('.car-prev');
   const next = wrap.querySelector('.car-next');
   const waitUntilSeen = wrap.hasAttribute('data-wait-until-seen');   // only the bottom carousel has this
