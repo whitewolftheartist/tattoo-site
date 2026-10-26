@@ -50,15 +50,17 @@ document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
   const photos = track.querySelectorAll('img');
   const prev = wrap.querySelector('.car-prev');
   const next = wrap.querySelector('.car-next');
+  const waitUntilSeen = wrap.hasAttribute('data-wait-until-seen');   // only the bottom carousel has this
   let index = 0;
+  let timer = null;
 
-  // go to one exact photo, centered (same way the Reviews carousel works)
-  function goTo(i) {
+  // go to one exact photo, centered
+  function goTo(i, instant) {
     index = (i + photos.length) % photos.length;   // wraps around forever
     const photo = photos[index];
     track.scrollTo({
       left: photo.offsetLeft - (track.clientWidth - photo.offsetWidth) / 2,
-      behavior: calmMotion ? 'auto' : 'smooth'
+      behavior: (instant || calmMotion) ? 'auto' : 'smooth'
     });
   }
 
@@ -86,6 +88,19 @@ document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
     resumeTimer = setTimeout(() => { paused = false; }, 5000);   // starts again after 5 seconds
   }
 
+  // start and stop the auto-switch
+  function startAuto() {
+    if (calmMotion) return;
+    clearInterval(timer);
+    timer = setInterval(() => {
+      if (!paused && !document.hidden) goTo(index + 1);
+    }, CAROUSEL_SPEED);
+  }
+  function stopAuto() {
+    clearInterval(timer);
+    timer = null;
+  }
+
   // arrows
   next.addEventListener('click', () => { goTo(index + 1); pauseForAWhile(); });
   prev.addEventListener('click', () => { goTo(index - 1); pauseForAWhile(); });
@@ -93,14 +108,27 @@ document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
   // touching pauses it for a bit
   track.addEventListener('touchstart', pauseForAWhile, { passive: true });
 
-  // hovering pauses it, but ONLY with a real mouse (not a finger tap on a phone)
+  // hovering pauses it, but ONLY with a real mouse
   wrap.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') paused = true; });
   wrap.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') paused = false; });
 
-  // auto-switch forever
-  if (!calmMotion) {
-    setInterval(() => {
-      if (!paused && !document.hidden) goTo(index + 1);
-    }, CAROUSEL_SPEED);
+  if (waitUntilSeen && 'IntersectionObserver' in window) {
+    // BOTTOM CAROUSEL: wait on photo 1 until someone scrolls to it
+    const watcher = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          goTo(0, true);      // always start on the first photo
+          paused = false;
+          startAuto();
+        } else {
+          stopAuto();
+          goTo(0, true);      // reset, so it starts fresh next time
+        }
+      });
+    }, { threshold: 0.5 });   // starts when half of it is on the screen
+    watcher.observe(wrap);
+  } else {
+    // TOP CAROUSEL: start right away
+    startAuto();
   }
 });
