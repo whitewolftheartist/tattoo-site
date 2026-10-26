@@ -292,3 +292,12 @@ section { padding: 40px 0; }
 @media (min-width: 1100px) {
   .review-track img { flex-basis: 32%; width: 32%; }
 }
+
+
+/* ===== HOME: top carousel + still photo ===== */
+.top-carousel { padding-top: 16px; padding-bottom: 8px; }
+.feature-photo { padding: 24px 0; }
+.feature-photo img { border-radius: 8px; }
+@media (min-width: 768px) {
+  .feature-photo img { max-width: 700px; margin: 0 auto; }
+}
