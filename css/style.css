@@ -357,3 +357,21 @@ main { overflow-x: clip; }
 
 /* bold words in the Fresh vs Healed text stand out in white */
 .hero-body strong { color: var(--text); font-weight: 700; }
+
+
+/* ===== "FRESH VS. HEALED" HEADLINE + TEXT ===== */
+.hero-sub {
+  color: var(--text);        /* white */
+  font-size: 1.5rem;         /* smaller than the big headline */
+  font-weight: 600;
+  margin: 24px 0 12px;
+  text-align: center;
+}
+.hero-body {
+  max-width: 34em;           /* keeps lines easy to read */
+  margin: 12px auto 0;
+  text-align: left;          /* body text lines up on the left */
+}
+@media (min-width: 768px) {
+  .hero-sub { font-size: 2rem; }
+}
