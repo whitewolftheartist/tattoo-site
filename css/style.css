@@ -422,3 +422,29 @@ main { overflow-x: clip; }
   color: var(--muted);
   margin-bottom: 28px;
 }
+
+
+/* ===== TALK ABOUT YOUR IDEA ===== */
+.cta { text-align: center; padding: 40px 0; }
+.cta-btn {
+  font-size: 1.1rem;
+  padding: 16px 28px;
+  margin-top: 8px;
+  background: var(--gold);           /* gold to match the brand */
+  box-shadow: 0 6px 20px rgba(212, 175, 55, .25);
+}
+.cta-alt-q {
+  font-family: var(--font-body);
+  color: var(--muted);
+  margin: 40px 0 12px;
+}
+.ig-card {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 16px 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+}
+.ig-card img { width: 48px; height: 48px; object-fit: contain; }
+.ig-handle { font-weight: 600; color: var(--text); font-size: 1.1rem; }
+.ig-note { color: var(--muted); font-size: .9rem; }
