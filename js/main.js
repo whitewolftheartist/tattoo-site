@@ -47,25 +47,35 @@ const calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
   const track = wrap.querySelector('.carousel');
+  const photos = track.querySelectorAll('img');
   const prev = wrap.querySelector('.car-prev');
   const next = wrap.querySelector('.car-next');
+  let index = 0;
 
-  // how far to move = one photo + the gap between photos
-  const step = () => {
-    const photo = track.querySelector('img');
-    return photo ? photo.offsetWidth + 12 : track.clientWidth;
-  };
-  const atStart = () => track.scrollLeft <= 5;
-  const atEnd = () => track.scrollLeft + track.clientWidth >= track.scrollWidth - 5;
+  // go to one exact photo, centered (same way the Reviews carousel works)
+  function goTo(i) {
+    index = (i + photos.length) % photos.length;   // wraps around forever
+    const photo = photos[index];
+    track.scrollTo({
+      left: photo.offsetLeft - (track.clientWidth - photo.offsetWidth) / 2,
+      behavior: calmMotion ? 'auto' : 'smooth'
+    });
+  }
 
-  function goNext() {
-    if (atEnd()) track.scrollTo({ left: 0, behavior: 'smooth' });   // last photo? back to first
-    else track.scrollBy({ left: step(), behavior: 'smooth' });
-  }
-  function goPrev() {
-    if (atStart()) track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });   // first photo? jump to last
-    else track.scrollBy({ left: -step(), behavior: 'smooth' });
-  }
+  // when someone swipes, figure out which photo is in the middle now
+  let scrollTimer;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const middle = track.scrollLeft + track.clientWidth / 2;
+      let closest = 0, best = Infinity;
+      photos.forEach((p, i) => {
+        const d = Math.abs(p.offsetLeft + p.offsetWidth / 2 - middle);
+        if (d < best) { best = d; closest = i; }
+      });
+      index = closest;
+    }, 120);
+  }, { passive: true });
 
   // pause for a little while when someone is using it
   let paused = false;
@@ -77,18 +87,20 @@ document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
   }
 
   // arrows
-  next.addEventListener('click', () => { goNext(); pauseForAWhile(); });
-  prev.addEventListener('click', () => { goPrev(); pauseForAWhile(); });
+  next.addEventListener('click', () => { goTo(index + 1); pauseForAWhile(); });
+  prev.addEventListener('click', () => { goTo(index - 1); pauseForAWhile(); });
 
-  // touching or hovering pauses it
+  // touching pauses it for a bit
   track.addEventListener('touchstart', pauseForAWhile, { passive: true });
-  wrap.addEventListener('mouseenter', () => { paused = true; });
-  wrap.addEventListener('mouseleave', () => { paused = false; });
+
+  // hovering pauses it, but ONLY with a real mouse (not a finger tap on a phone)
+  wrap.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') paused = true; });
+  wrap.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') paused = false; });
 
   // auto-switch forever
   if (!calmMotion) {
     setInterval(() => {
-      if (!paused && !document.hidden) goNext();
+      if (!paused && !document.hidden) goTo(index + 1);
     }, CAROUSEL_SPEED);
   }
 });
