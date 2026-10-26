@@ -301,3 +301,19 @@ section { padding: 40px 0; }
 @media (min-width: 768px) {
   .feature-photo img { max-width: 700px; margin: 0 auto; }
 }
+
+
+/* ===== CAROUSEL ARROWS ===== */
+.carousel-wrap { position: relative; }
+.car-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 44px; height: 44px;          /* big enough to tap */
+  padding: 10px; border: 0; border-radius: 50%;
+  background: rgba(0, 0, 0, .45);    /* dark circle so the arrow shows on any photo */
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.car-btn img { width: 24px; height: 24px; object-fit: contain; }
+.car-prev { left: 6px; }
+.car-next { right: 6px; }
