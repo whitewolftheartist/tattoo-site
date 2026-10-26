@@ -1,5 +1,5 @@
 /* ===== FONTS ===== */
- @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 /* ===== COLORS ===== */
 :root {
@@ -9,7 +9,7 @@
   --accent: #c9a27e;
   --line: #2a2a2a;
   --font-head: 'Playfair Display', serif;
-  --font-body: 'Playfair Display', serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
 }
 
 /* ===== BASICS ===== */
@@ -361,16 +361,18 @@ main { overflow-x: clip; }
 
 /* ===== "FRESH VS. HEALED" HEADLINE + TEXT ===== */
 .hero-sub {
-  color: var(--text);        /* white */
-  font-size: 1.5rem;         /* smaller than the big headline */
+  font-family: var(--font-body);   /* Poppins */
+  color: var(--text);              /* white */
+  font-size: 1.5rem;               /* smaller than the big headline */
   font-weight: 600;
   margin: 24px 0 12px;
   text-align: center;
 }
 .hero-body {
-  max-width: 34em;           /* keeps lines easy to read */
+  font-family: var(--font-body);   /* Poppins */
+  max-width: 34em;                 /* keeps lines easy to read */
   margin: 12px auto 0;
-  text-align: left;          /* body text lines up on the left */
+  text-align: left;                /* body text lines up on the left */
 }
 @media (min-width: 768px) {
   .hero-sub { font-size: 2rem; }
