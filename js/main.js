@@ -41,7 +41,10 @@ if (rotator) {
 }
 
 
-// ===== CAROUSEL ARROWS =====
+// ===== CAROUSEL ARROWS + AUTO-SWITCH =====
+const CAROUSEL_SPEED = 3000;   // 3000 = 3 seconds per photo
+const calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
   const track = wrap.querySelector('.carousel');
   const prev = wrap.querySelector('.car-prev');
@@ -55,12 +58,37 @@ document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
   const atStart = () => track.scrollLeft <= 5;
   const atEnd = () => track.scrollLeft + track.clientWidth >= track.scrollWidth - 5;
 
-  next.addEventListener('click', () => {
-    if (atEnd()) track.scrollTo({ left: 0, behavior: 'smooth' });   // last photo? go back to first
+  function goNext() {
+    if (atEnd()) track.scrollTo({ left: 0, behavior: 'smooth' });   // last photo? back to first
     else track.scrollBy({ left: step(), behavior: 'smooth' });
-  });
-  prev.addEventListener('click', () => {
+  }
+  function goPrev() {
     if (atStart()) track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });   // first photo? jump to last
     else track.scrollBy({ left: -step(), behavior: 'smooth' });
-  });
+  }
+
+  // pause for a little while when someone is using it
+  let paused = false;
+  let resumeTimer;
+  function pauseForAWhile() {
+    paused = true;
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { paused = false; }, 5000);   // starts again after 5 seconds
+  }
+
+  // arrows
+  next.addEventListener('click', () => { goNext(); pauseForAWhile(); });
+  prev.addEventListener('click', () => { goPrev(); pauseForAWhile(); });
+
+  // touching or hovering pauses it
+  track.addEventListener('touchstart', pauseForAWhile, { passive: true });
+  wrap.addEventListener('mouseenter', () => { paused = true; });
+  wrap.addEventListener('mouseleave', () => { paused = false; });
+
+  // auto-switch forever
+  if (!calmMotion) {
+    setInterval(() => {
+      if (!paused && !document.hidden) goNext();
+    }, CAROUSEL_SPEED);
+  }
 });
