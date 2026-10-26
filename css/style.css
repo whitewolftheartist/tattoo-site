@@ -377,3 +377,8 @@ main { overflow-x: clip; }
 @media (min-width: 768px) {
   .hero-sub { font-size: 2rem; }
 }
+
+
+/* ===== LESS SPACE between the body text and the first carousel ===== */
+.hero { padding-bottom: 8px; }           /* was 24px */
+.top-carousel { padding-top: 8px; }      /* was 16px */
