@@ -564,3 +564,13 @@ html {
   line-height: 1.6;
 }
 .cu-note strong { color: var(--text); }
+
+
+
+/* ===== COVER-UPS INTRO ===== */
+.cu-sub strong { color: var(--text); font-weight: 700; }   /* white bold question */
+.cu-nojudge {
+  font-family: var(--font-body);
+  color: #d9d9d9;
+  margin: -8px 0 8px;
+}
