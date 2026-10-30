@@ -132,3 +132,43 @@ document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
     startAuto();
   }
 });
+
+
+// ===== FAQ: show 6 first + spotlight as you scroll =====
+const faq = document.querySelector('.faq');
+if (faq) {
+  const items = [...faq.querySelectorAll('details')];
+  const SHOW_FIRST = 6;   // how many questions show at first
+
+  // 1) show only the first 6, with a "See all" button
+  if (items.length > SHOW_FIRST) {
+    const extra = items.slice(SHOW_FIRST);
+    const moreText = 'See all questions (' + extra.length + ' more) ↓';
+    extra.forEach((d) => { d.hidden = true; });
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'faq-more';
+    btn.textContent = moreText;
+    btn.setAttribute('aria-expanded', 'false');
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      extra.forEach((d) => { d.hidden = isOpen; });
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      btn.textContent = isOpen ? moreText : 'Show fewer questions ↑';
+      if (isOpen) items[SHOW_FIRST - 1].scrollIntoView({ block: 'center' });   // don't lose your place
+    });
+
+    items[items.length - 1].after(btn);
+  }
+
+  // 2) spotlight: questions light up when they reach the middle of the screen
+  if (!calmMotion && 'IntersectionObserver' in window) {
+    faq.classList.add('faq-spotlight');
+    const spotlight = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle('is-lit', e.isIntersecting));
+    }, { rootMargin: '-30% 0px -30% 0px' });   // the "middle" of the screen
+    items.forEach((d) => spotlight.observe(d));
+  }
+}
