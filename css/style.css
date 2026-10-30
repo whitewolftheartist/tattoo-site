@@ -516,3 +516,51 @@ html {
 /* ===== FRESH VS. HEALED PAGE ===== */
 .fvh-title { color: var(--gold); }         /* gold headline */
 .fvh-intro { padding-bottom: 8px; }        /* carousel closer to the text (was 40px) */
+
+
+
+/* ===== COVER-UPS PAGE: easier to read ===== */
+.cu-title { color: var(--gold); }                 /* gold title */
+.cu-body { color: #d9d9d9; }                      /* soft light gray, less glow */
+
+/* 3 steps in little cards with gold numbers */
+.cu-steps {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.cu-steps li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #171717;                            /* charcoal card, like the FAQ */
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #d9d9d9;
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+.cu-num {
+  flex: 0 0 32px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #111;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* honest note callout */
+.cu-note {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  background: rgba(212, 175, 55, .07);            /* a whisper of gold */
+  color: #c9c9c9;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+.cu-note strong { color: var(--text); }
