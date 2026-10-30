@@ -506,4 +506,8 @@ main { overflow-x: clip; }
 }
 
 /* smooth glide when tapping "See what clients are saying" */
-html { scroll-behavior: smooth; }
+/* and stop just under the sticky top bar so the headline isn't covered */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+}
