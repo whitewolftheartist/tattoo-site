@@ -471,3 +471,39 @@ main { overflow-x: clip; }
 .hero { padding-bottom: 0; }        /* was 8px */
 .hero h1 { margin-bottom: 4px; }    /* was 12px */
 .trailer { padding-top: 0; }        /* was 8px */
+
+
+
+/* ===== SHORTER VIDEO ON PHONES (so the next part peeks out) ===== */
+.trailer-video {
+  width: auto;
+  max-width: 100%;
+  max-height: 58vh;          /* smaller number = shorter video */
+  margin: 0 auto;
+}
+
+/* ===== UNDER THE TRAILER ===== */
+.hero-cta {
+  text-align: center;
+  padding: 16px 0 32px;
+}
+.hero-cta-line {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.hero-cta-place {
+  color: var(--muted);
+  margin: 4px 0 16px;
+}
+.hero-cta-reviews {
+  display: block;
+  margin-top: 16px;
+  padding: 8px;              /* bigger tap area */
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* smooth glide when tapping "See what clients are saying" */
+html { scroll-behavior: smooth; }
