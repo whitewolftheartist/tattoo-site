@@ -511,3 +511,8 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px;
 }
+
+
+/* ===== FRESH VS. HEALED PAGE ===== */
+.fvh-title { color: var(--gold); }         /* gold headline */
+.fvh-intro { padding-bottom: 8px; }        /* carousel closer to the text (was 40px) */
