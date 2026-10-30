@@ -601,3 +601,115 @@ html {
 .faq-spotlight details[open] summary {
   opacity: 1;                       /* bright */
 }
+
+
+/* ===== ABOUT ME PAGE ===== */
+.ab-section { padding: 36px 0; text-align: center; }
+
+/* gold headlines */
+.ab-hook-title {
+  color: var(--gold);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.ab-hook-title span { display: block; }          /* one line each */
+.ab-title {
+  color: var(--gold);
+  font-size: 2rem;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* her oval photo, with a soft golden glow */
+.ab-oval {
+  display: block;
+  width: 78%;
+  max-width: 360px;
+  height: auto;
+  margin: 24px auto;
+  filter: drop-shadow(0 10px 30px rgba(212, 175, 55, .18));
+}
+
+/* body text: soft gray, bold words in white */
+.ab-text {
+  font-family: var(--font-body);
+  color: #d9d9d9;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 32em;
+  margin: 0 auto 14px;
+}
+.ab-text strong { color: var(--text); }
+
+/* the "landing" lines that end a section */
+.ab-land {
+  font-family: var(--font-body);
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-top: 12px;
+}
+
+/* charcoal cards ("Who is this for" + "What to expect") */
+.ab-card {
+  background: #171717;
+  border-radius: 16px;
+  padding: 32px 20px;
+  margin: 24px 0;
+}
+.ab-intro {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.ab-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.ab-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-family: var(--font-body);
+  color: #d9d9d9;
+  line-height: 1.6;
+}
+.ab-list strong { color: var(--text); }
+.ab-icon { flex: 0 0 28px; font-size: 1.15rem; line-height: 1.5; text-align: center; }
+
+/* photos */
+.ab-photo {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 8px auto 20px;
+  border-radius: 12px;
+}
+.ab-photos { display: grid; gap: 12px; }
+.ab-photos .ab-photo { margin: 0 auto; }
+
+.ab-age {
+  font-family: var(--font-body);
+  color: var(--muted);
+  font-size: .9rem;
+  margin-top: 20px;
+}
+
+/* bigger screens */
+@media (min-width: 768px) {
+  .ab-hook-title { font-size: 3.6rem; }
+  .ab-title { font-size: 2.6rem; }
+  .ab-card { padding: 44px 40px; max-width: 760px; margin: 32px auto; }
+  .ab-photos { grid-template-columns: 1fr 1fr; max-width: 960px; margin: 0 auto; }
+  .ab-photos .ab-photo { max-width: none; height: 100%; object-fit: cover; }
+}
